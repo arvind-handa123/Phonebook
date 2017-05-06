@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html ng-app="phoneBookCRUD">
+<head>
+  <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="resources/css/stylesheet.css"/>
+  <script type="text/javascript" src="resources/js/angular.js"></script>
+  <script type="text/javascript" src="resources/js/app.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  
+  <title>Phonebook CRUD</title>
+</head>
+<body ng-controller="PhonebookController as phonebook">
+
+  <div class="container" class="form-group">
+    <h3>Add a contact</h3>
+    <form name="contactForm" ng-controller="ContactController as contactCtrl"
+      ng-submit="contactForm.$valid &&
+        contactCtrl.addContact(phonebook)">
+
+      <fieldset class="form-group">
+        <input type="name" class="form-control text-capitalize should-validate"
+        placeholder="John Doe" name="Name"
+        ng-model="contactCtrl.contact.name"
+        required />
+      </fieldset>
+
+      <fieldset class="form-group">
+        <input type="number" class="form-control should-validate"
+        placeholder="1234567890" name="PhoneNumber"
+        ng-model="contactCtrl.contact.phoneNumber"
+        required ng-pattern="/^\d{10}(\.\d{1,9})?$/"/>
+      </fieldset>
+      <div ng-hide="contactForm.$valid || contactForm.PhoneNumber.$pristine">
+        <h6 class="alert alert-warning">Phone number must be 10 digits long</h6>
+      </div>
+
+       <fieldset class="form-group">
+          <button type="submit"
+            class="btn btn-primary pull-right"
+            ng-disabled="contactForm.$invalid || contactForm.$pristine">Submit</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <hr class="ruler">
+
+  <div class="container list-group">
+    <h3 class="text-center">Saved Contacts</h3>
+    <fieldset class="form-group">
+      <input type="text" class="form-control" ng-model="search" placeholder="Search by name">
+    </fieldset>
+    <div class="list-group-item" ng-repeat="contact in phonebook.contacts | filter:search:startsWith">
+      <div class="list-inline">
+        <li>
+          <h4 class="pull-left">
+            {{contact.name}}
+          </h4>
+        </li>
+        <li>
+          <h4>{{contact.phoneNumber}}</h4>
+        </li>
+        <li>
+          <button type="submit"
+            class="btn btn-primary pull-right">Edit</button>
+        </li>
+        <li>
+          <button type="submit"
+            class="btn btn-primary pull-right">Delete</button>
+        </li>
+      </div>
+  </div>
+</body>
+</html>
