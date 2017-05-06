@@ -12,18 +12,18 @@ import com.pranavanurag.phonebook.model.Contact;
 @RestController
 public class ContactsController {
 
-   	@RequestMapping("/contacts.json")
+    @RequestMapping("/contacts.json")
     public String servePhonebookJSON() {
-   		List <Contact> contacts = new ArrayList<Contact>();   		
-   		
-   		contacts.add(new Contact("NGolo Kante", 7777777777L));
-   		contacts.add(new Contact("Eden Hazard", 1010101010L));
-   		contacts.add(new Contact("David Luiz", 3030303030L));
-   		contacts.add(new Contact("Cesc Fabregas", 4444444444L));
-   		contacts.add(new Contact("Deigo Costa", 1919191919L));
-   		
-   		String JSONData = new Gson().toJson(contacts);
-   		
-   		return JSONData;
+        List <Contact> contacts = new ArrayList<Contact>();         
+        
+        contacts.add(new Contact("NGolo Kante", 7777777777L));
+        contacts.add(new Contact("Eden Hazard", 1010101010L));
+        contacts.add(new Contact("David Luiz", 3030303030L));
+        contacts.add(new Contact("Cesc Fabregas", 4444444444L));
+        contacts.add(new Contact("Deigo Costa", 1919191919L));
+        
+        String JSONData = new Gson().toJson(contacts);
+        
+        return JSONData;
     }
 }
