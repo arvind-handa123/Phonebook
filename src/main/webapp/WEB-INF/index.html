@@ -19,14 +19,13 @@
   <div class="container" class="form-group">
     <h3>Add a contact</h3>
     <form name="contactForm" ng-controller="ContactController as contactCtrl"
-      ng-submit="contactForm.$valid &&
-        contactCtrl.addContact(phonebook)">
+      ng-submit="contactForm.$valid && contactCtrl.addContact(phonebook)">
 
       <fieldset class="form-group">
         <input type="name" class="form-control text-capitalize should-validate"
         placeholder="John Doe" name="Name"
         ng-model="contactCtrl.contact.name"
-        required />
+        />
       </fieldset>
 
       <fieldset class="form-group">
@@ -36,13 +35,14 @@
         required ng-pattern="/^\d{10}(\.\d{1,9})?$/"/>
       </fieldset>
       <div ng-hide="contactForm.$valid || contactForm.PhoneNumber.$pristine">
-        <h6 class="alert alert-warning">Phone number must be 10 digits long</h6>
+        <h6 class="alert alert-warning">Phone number must be 10 digits long (required field)</h6>
       </div>
 
        <fieldset class="form-group">
           <button type="submit"
             class="btn btn-primary pull-right"
-            ng-disabled="contactForm.$invalid || contactForm.$pristine">Submit</button>
+            ng-disabled="contactForm.$invalid || contactForm.$pristine"
+            ng-click=addContact(contactCtrl.contact)>Submit</button>
       </fieldset>
     </form>
   </div>
@@ -66,13 +66,25 @@
         </li>
         <li>
           <button type="submit"
-            class="btn btn-primary pull-right">Edit</button>
+            class="btn btn-primary pull-right"
+            ng-click="phonebook.updateContact(contact.id)">Edit</button>
         </li>
         <li>
           <button type="submit"
-            class="btn btn-primary pull-right">Delete</button>
+            class="btn btn-primary pull-right"
+            ng-click=phonebook.deleteContact(contact.id)>Delete</button>
         </li>
       </div>
+    </div> 
   </div>
+
+  <div class="container form-group">
+    <button type="submit"
+      class="btn btn-primary pull-left"
+      ng-click=phonebook.deleteAllContacts()>
+      Delete All Contacts
+    </button>
+  </div>
+
 </body>
 </html>
