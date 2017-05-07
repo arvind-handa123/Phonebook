@@ -18,20 +18,20 @@
 
   <div class="container" class="form-group">
     <h3>Add a contact</h3>
-    <form name="contactForm" ng-controller="ContactController as contactCtrl"
-      ng-submit="contactForm.$valid && contactCtrl.addContact(phonebook)">
+    <form name="contactForm"
+      ng-submit="contactForm.$valid && phonebook.addContact(newContact)">
 
       <fieldset class="form-group">
         <input type="name" class="form-control text-capitalize should-validate"
         placeholder="John Doe" name="Name"
-        ng-model="contactCtrl.contact.name"
+        ng-model="phonebook.newContact.name"
         />
       </fieldset>
 
       <fieldset class="form-group">
         <input type="number" class="form-control should-validate"
         placeholder="1234567890" name="PhoneNumber"
-        ng-model="contactCtrl.contact.phoneNumber"
+        ng-model="phonebook.newContact.phoneNumber"
         required ng-pattern="/^\d{10}(\.\d{1,9})?$/"/>
       </fieldset>
       <div ng-hide="contactForm.$valid || contactForm.PhoneNumber.$pristine">
@@ -42,7 +42,7 @@
           <button type="submit"
             class="btn btn-primary pull-right"
             ng-disabled="contactForm.$invalid || contactForm.$pristine"
-            ng-click=addContact(contactCtrl.contact)>Submit</button>
+            ng-click=phonebook.addContact()>Submit</button>
       </fieldset>
     </form>
   </div>
@@ -67,7 +67,7 @@
         <li>
           <button type="submit"
             class="btn btn-primary pull-right"
-            ng-click="phonebook.updateContact(contact.id)">Edit</button>
+            ng-click="phonebook.updateContact(contact)">Edit</button>
         </li>
         <li>
           <button type="submit"
